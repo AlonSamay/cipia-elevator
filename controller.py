@@ -65,6 +65,7 @@ class Controller:
     
     def notify_state_change(self, elevator: Elevator) -> None:
         """if the elevator's direction is idle, choose the closest floor for the elevator to go to and add the floors on it's way. otherwise just add the floors on it's way
+           this function is the callback for each elevator
 
         Args:
             elevator (Elevator): target elevator

@@ -1,5 +1,6 @@
 import bisect
 from enum import Enum
+from typing import Callable
 
 from constants import MAX_FLOOR, MIN_FLOOR
 
@@ -19,8 +20,8 @@ class DirectionState(Enum):
 
 class Elevator:
     
-    def __init__(self, callback, state = DirectionState.Idle, current_level: int = 0, required_levels: list[int] = None, queued_levels: list[int] = None) -> None:
-        self.callback = callback
+    def __init__(self, notify_state_change: Callable[['Elevator'], None], state = DirectionState.Idle, current_level: int = 0, required_levels: list[int] = None, queued_levels: list[int] = None) -> None:
+        self.notify_state_change = notify_state_change
         self.state = state
         self.current_level = current_level
         self._required_levels = required_levels if required_levels else []
@@ -57,7 +58,7 @@ class Elevator:
         if self.state == DirectionState.Idle:
             self._required_levels.append(level)
             self.state = self.choose_state(level)
-            self.callback(self)
+            self.notify_state_change(self)
         else:
             if self.is_floor_in_way(level):
                 if self.state == DirectionState.Up:   
@@ -91,7 +92,7 @@ class Elevator:
             else:
                 self.state = DirectionState.Idle
             
-            self.callback(self)
+            self.notify_state_change(self)
                
     # for demo purposes 
     def progress(self, count):

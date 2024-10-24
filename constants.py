@@ -1,3 +1,4 @@
+# changing for each building. chose 3 floors and -4 parking for a mall example
 MAX_FLOOR = 3 
 MIN_FLOOR = -4
 
