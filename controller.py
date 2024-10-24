@@ -8,7 +8,7 @@ class Controller:
         self.levels_queue: list[int] = levels_queue if levels_queue else []
     
     def add_elevators(self, *elevators):
-        self.elevators.append(elevators)
+        self.elevators.extend(elevators)
     
     # called from floor when someone push the up or down button at a specific floor
     def call(self, level: int, direction: DirectionState) -> Elevator:
