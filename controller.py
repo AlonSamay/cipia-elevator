@@ -36,7 +36,7 @@ class Controller:
             direction (DirectionState): target direction
 
         Returns:
-            Elevator: _description_
+            Elevator: decided elevator
         """
         priority_elevator: Elevator = None
         priority_distance: int = FLOORS_COUNT
