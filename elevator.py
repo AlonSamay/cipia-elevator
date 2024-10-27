@@ -11,12 +11,13 @@ class DirectionState(Enum):
     Down = "Down"
     
     def reverse(self):
-        if self == DirectionState.Up:
-            return DirectionState.Down
-        elif self == DirectionState.Down:
-            return DirectionState.Up
-        else:
-            return DirectionState.Idle
+        match self:
+            case DirectionState.Up:
+                return DirectionState.Down
+            case DirectionState.Down:
+                return DirectionState.Up
+            case _:
+                return DirectionState.Idle
 
 class Elevator:
     
