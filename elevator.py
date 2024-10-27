@@ -2,7 +2,7 @@ import bisect
 from enum import Enum
 from typing import Callable
 
-from constants import MAX_FLOOR, MIN_FLOOR
+from constants import *
 
 class DirectionState(Enum):
     Idle = "Idle"
@@ -29,7 +29,7 @@ class Elevator:
         
 
     def priority(self, level: int, direction: DirectionState) -> int:
-        """return this elevator priority (distance), lower is prefered
+        """return this elevator priority (distance)
 
         Args:
             level (int): target level
@@ -38,8 +38,10 @@ class Elevator:
         Returns:
             int: distance or none if there is no prefered priority
         """
-        if self.state == DirectionState.Idle or (direction == self.state and self.is_floor_in_way(level)):
+        if self.state == DirectionState.Idle:
             return self.distance(level)
+        elif direction == self.state and self.is_floor_in_way(level):
+            return FLOORS_COUNT / 2 + self.distance(level) # will be prefered over idle but if it at the other edge
         else:
             return None
     
