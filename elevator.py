@@ -14,7 +14,7 @@ class DirectionState(Enum):
         if self == DirectionState.Up:
             return DirectionState.Down
         elif self == DirectionState.Down:
-            return DirectionState.Down
+            return DirectionState.Up
         else:
             return DirectionState.Idle
 
