@@ -1,0 +1,34 @@
+from controller import Controller
+from elevator import Elevator, DirectionState
+
+def main():
+    # state = DirectionState.Up
+    # reverse_state(state)
+    # state = DirectionState.Down
+    # reverse_state(state)
+    # state = DirectionState.Idle
+    # reverse_state(state)
+    
+
+    # Create controller
+    controller = Controller()
+    ele1, ele2 = controller.create_elevators(2)
+
+    # Simulate calls
+    controller.call(3, DirectionState.Down)
+    controller.call(-4, DirectionState.Up)
+    controller.call(2, DirectionState.Up)
+
+    # Simulate elevator progress
+    for _ in range(10):
+        controller.elevators_progress()
+        print("Elevator " + str(ele1.id) + " is at floor: " + str(ele1.current_level) + " and at state: " + str(ele1.state))
+        print("Elevator " + str(ele2.id) + " is at floor: " + str(ele2.current_level) + " and at state: " + str(ele2.state))
+
+def reverse_state(state: DirectionState) -> None:
+    print("Before reverse: " + str(state))
+    state = state.reverse()
+    print("After reverse: " + str(state))
+
+if __name__ == "__main__":
+    main()
